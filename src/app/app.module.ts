@@ -25,6 +25,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+// IMPORTANTE: añade el módulo de Sidenav
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 //Ngx-cookie-service
 import { CookieService } from 'ngx-cookie-service';
@@ -35,6 +37,8 @@ import { HomeScreenComponent } from './screens/home-screen/home-screen.component
 import { AdminScreenComponent } from './screens/admin-screen/admin-screen.component';
 import { AlumnosScreenComponent } from './screens/alumnos-screen/alumnos-screen.component';
 import { MaestrosScreenComponent } from './screens/maestros-screen/maestros-screen.component';
+import { NavbarUserComponent } from './partials/navbar-user/navbar-user.component';
+import { SidebarComponent } from './partials/sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +53,9 @@ import { MaestrosScreenComponent } from './screens/maestros-screen/maestros-scre
     HomeScreenComponent,
     AdminScreenComponent,
     AlumnosScreenComponent,
-    MaestrosScreenComponent
+    MaestrosScreenComponent,
+    NavbarUserComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +72,8 @@ import { MaestrosScreenComponent } from './screens/maestros-screen/maestros-scre
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
-    MatSelectModule
+    MatSelectModule,
+    MatSidenavModule
   ],
   providers: [
     CookieService,
