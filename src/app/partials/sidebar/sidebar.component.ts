@@ -8,7 +8,6 @@ import { FacadeService } from 'src/app/services/facade.service';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
   mobileOpen = false;
   isMobileView = window.innerWidth < 900;
   userRole: string = '';
@@ -16,7 +15,7 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     private facadeService: FacadeService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.userRole = this.facadeService.getUserGroup();
@@ -93,5 +92,4 @@ export class SidebarComponent implements OnInit {
   canSeeRegisterItem(): boolean {
     return this.isAdmin() || this.isTeacher();
   }
-
 }

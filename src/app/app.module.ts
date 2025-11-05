@@ -25,6 +25,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSelectModule} from '@angular/material/select';
+import {MatTableModule} from '@angular/material/table';
+// Paginación
+import {MatPaginatorIntl, MatPaginatorModule} from '@angular/material/paginator';
+//Para el paginator en español
+import { getSpanishPaginatorIntl } from './shared/spanish-paginator-intl';
+
 // IMPORTANTE: añade el módulo de Sidenav
 import { MatSidenavModule } from '@angular/material/sidenav';
 
@@ -73,11 +79,14 @@ import { SidebarComponent } from './partials/sidebar/sidebar.component';
     MatNativeDateModule,
     MatCheckboxModule,
     MatSelectModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatTableModule,
+    MatPaginatorModule
   ],
   providers: [
     CookieService,
     { provide: MAT_DATE_LOCALE, useValue: 'es-MX' },
+    { provide: MatPaginatorIntl, useValue: getSpanishPaginatorIntl() },
     provideNgxMask()
   ],
   bootstrap: [AppComponent]
