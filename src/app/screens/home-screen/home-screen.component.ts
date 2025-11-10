@@ -14,12 +14,11 @@ export class HomeScreenComponent implements OnInit{
   constructor(
     private facadeService: FacadeService,
     private router: Router
-  ) { }
+  ){}
 
   ngOnInit(): void {
     this.rol = this.facadeService.getUserGroup();
-    console.log("Rol de usuario: ", this.rol);
-
+    console.log("Rol: ", this.rol);
   }
 
 }
