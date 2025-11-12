@@ -35,11 +35,22 @@ export class RegistroAdminComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.admin = this.administradoresService.esquemaAdmin();
-    // Rol del usuario
-    this.admin.rol = this.rol;
-
-    console.log("Datos admin: ", this.admin);
+    //El primer if valida si existe un parámetro en la URL
+    if(this.activatedRoute.snapshot.params['id'] != undefined){
+      this.editar = true;
+      //Asignamos a nuestra variable global el valor del ID que viene por la URL
+      this.idUser = this.activatedRoute.snapshot.params['id'];
+      console.log("ID User: ", this.idUser);
+      //Al iniciar la vista asignamos los datos del user
+      this.admin = this.datos_user;
+    }else{
+      // Va a registrar un nuevo administrador
+      this.admin = this.administradoresService.esquemaAdmin();
+      this.admin.rol = this.rol;
+      this.token = this.facadeService.getSessionToken();
+    }
+    //Imprimir datos en consola
+    console.log("Admin: ", this.admin);
 
   }
 
@@ -106,7 +117,27 @@ export class RegistroAdminComponent implements OnInit {
   }
 
   public actualizar(){
+    // Validación de los datos
+    this.errors = {};
+    this.errors = this.administradoresService.validarAdmin(this.admin, this.editar);
+    if(Object.keys(this.errors).length > 0){
+      return false;
+    }
 
+    // Ejecutar el servicio de actualización
+    this.administradoresService.actualizarAdmin(this.admin).subscribe(
+      (response) => {
+        // Redirigir o mostrar mensaje de éxito
+        alert("Administrador actualizado exitosamente");
+        console.log("Administrador actualizado: ", response);
+        this.router.navigate(["administrador"]);
+      },
+      (error) => {
+        // Manejar errores de la API
+        alert("Error al actualizar administrador");
+        console.error("Error al actualizar administrador: ", error);
+      }
+    );
   }
 
   // Función para los campos solo de datos alfabeticos
