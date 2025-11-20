@@ -37,6 +37,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 //Ngx-cookie-service
 import { CookieService } from 'ngx-cookie-service';
 
+// Modulo para las gráficas
+import { NgChartsModule } from 'ng2-charts';
+
 // Third Party Modules
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { HomeScreenComponent } from './screens/home-screen/home-screen.component';
@@ -46,6 +49,7 @@ import { MaestrosScreenComponent } from './screens/maestros-screen/maestros-scre
 import { NavbarUserComponent } from './partials/navbar-user/navbar-user.component';
 import { SidebarComponent } from './partials/sidebar/sidebar.component';
 import { EliminarUserModalComponent } from './modals/eliminar-user-modal/eliminar-user-modal.component';
+import { GraficasScreenComponent } from './screens/graficas-screen/graficas-screen.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +67,8 @@ import { EliminarUserModalComponent } from './modals/eliminar-user-modal/elimina
     MaestrosScreenComponent,
     NavbarUserComponent,
     SidebarComponent,
-    EliminarUserModalComponent
+    EliminarUserModalComponent,
+    GraficasScreenComponent
   ],
   imports: [
     BrowserModule,
@@ -83,7 +88,8 @@ import { EliminarUserModalComponent } from './modals/eliminar-user-modal/elimina
     MatSelectModule,
     MatSidenavModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    NgChartsModule
   ],
   providers: [
     CookieService,
