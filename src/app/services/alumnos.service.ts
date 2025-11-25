@@ -145,4 +145,16 @@ export class AlumnosService {
     }
     return this.http.delete<any>(`${environment.url_api}/alumnos/${idAlumno}/`, { headers });
   }
+
+  public obtenerListaAlumnos(): Observable<any>{
+    // Verificamos si existe el token de sesión
+    const token = this.facadeService.getSessionToken();
+    let headers: HttpHeaders;
+    if (token) {
+      headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token });
+    } else {
+      headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    }
+    return this.http.get<any>(`${environment.url_api}/lista-alumnos/`, { headers });
+  }
 }

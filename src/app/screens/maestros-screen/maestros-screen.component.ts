@@ -1,16 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { EliminarUserModalComponent } from 'src/app/modals/eliminar-user-modal/eliminar-user-modal.component';
 import { FacadeService } from 'src/app/services/facade.service';
 import { MaestrosService } from 'src/app/services/maestros.service';
+import {Sort, MatSort} from '@angular/material/sort';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+
+
 
 @Component({
   selector: 'app-maestros-screen',
   templateUrl: './maestros-screen.component.html',
-  styleUrls: ['./maestros-screen.component.scss']
+  styleUrls: ['./maestros-screen.component.scss'],
+
 })
 export class MaestrosScreenComponent implements OnInit {
 
@@ -19,22 +23,33 @@ export class MaestrosScreenComponent implements OnInit {
   public token: string = "";
   public lista_maestros: any[] = [];
 
+
+
+  sortedData: DatosUsuario[];
+
   //Para la tabla
   displayedColumns: string[] = ['id_trabajador', 'nombre', 'email', 'fecha_nacimiento', 'telefono', 'rfc', 'cubiculo', 'area_investigacion', 'editar', 'eliminar'];
   dataSource = new MatTableDataSource<DatosUsuario>(this.lista_maestros as DatosUsuario[]);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+
+
+
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.obtenerMaestros();
   }
 
   constructor(
     public facadeService: FacadeService,
     public maestrosService: MaestrosService,
     private router: Router,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+
+  ) {  this.sortedData = this.lista_maestros.slice();
+
+  }
 
   ngOnInit(): void {
     this.name_user = this.facadeService.getUserCompleteName();
@@ -47,7 +62,7 @@ export class MaestrosScreenComponent implements OnInit {
       this.router.navigate(["/"]);
     }
     //Obtener maestros
-    this.obtenerMaestros();
+
   }
 
   // Consumimos el servicio para obtener los maestros
@@ -66,7 +81,21 @@ export class MaestrosScreenComponent implements OnInit {
           });
           console.log("Maestros: ", this.lista_maestros);
 
-          this.dataSource = new MatTableDataSource<DatosUsuario>(this.lista_maestros as DatosUsuario[]);
+            this.dataSource.data = this.lista_maestros;
+
+            this.dataSource.paginator = this.paginator;
+            this.dataSource.sort = this.sort;
+
+          this.dataSource.filterPredicate = (data, filter) => {
+          const fullName = (data.first_name + ' ' + data.last_name).toLowerCase();
+          filter = filter.trim().toLowerCase();
+
+          return (
+            data.first_name.toLowerCase().includes(filter) ||
+            data.last_name.toLowerCase().includes(filter) ||
+            fullName.includes(filter)
+          );
+  };
         }
       }, (error) => {
         console.error("Error al obtener la lista de maestros: ", error);
@@ -108,7 +137,39 @@ export class MaestrosScreenComponent implements OnInit {
     }
   }
 
+  sortData(sort: Sort) {
+    const data = this.lista_maestros.slice();
+    if (!sort.active || sort.direction === '') {
+      this.dataSource.data = data;
+      return;
+    }
+
+    this.dataSource.data = data.sort((a, b) => {
+      const isAsc = sort.direction === 'asc';
+      switch (sort.active) {
+        case 'id_trabajador':
+          return compare(a.id_trabajador, b.id_trabajador, isAsc);
+        case 'nombre':
+          return compare(a.first_name + a.last_name, b.first_name + b.last_name, isAsc);
+        default:
+          return 0;
+      }
+    });
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }
+
+function compare(a: number | string, b: number | string, isAsc: boolean) {
+  return (a < b ? -1 : 1) * (isAsc ? 1 : -1);
+
+}
+
+
 
 //Esto va fuera de la llave que cierra la clase
 export interface DatosUsuario {

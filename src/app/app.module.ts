@@ -3,8 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSortModule } from '@angular/material/sort';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginScreenComponent } from './screens/login-screen/login-screen.component';
@@ -14,6 +14,7 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { RegistroAdminComponent } from './partials/registro-admin/registro-admin.component';
 import { RegistroAlumnosComponent } from './partials/registro-alumnos/registro-alumnos.component';
 import { RegistroMaestrosComponent } from './partials/registro-maestros/registro-maestros.component';
+import {MatTableDataSource} from '@angular/material/table';
 
 //Angular material
 import {MatCardModule} from '@angular/material/card';
@@ -83,7 +84,10 @@ import { EliminarUserModalComponent } from './modals/eliminar-user-modal/elimina
     MatSelectModule,
     MatSidenavModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule,
+     MatSortModule,
+     MatFormFieldModule, MatInputModule, MatTableModule
   ],
   providers: [
     CookieService,
