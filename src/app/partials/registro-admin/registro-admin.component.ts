@@ -98,7 +98,7 @@ export class RegistroAdminComponent implements OnInit {
           alert("Administrador registrado exitosamente");
           console.log("Administrador registrado: ", response);
           if(this.token && this.token !== ""){
-            this.router.navigate(["administrador"]);
+            this.router.navigate(["dashboard/administrador"]);
           }else{
             this.router.navigate(["/"]);
           }

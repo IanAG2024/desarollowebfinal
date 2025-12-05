@@ -40,13 +40,13 @@ export class LoginScreenComponent implements OnInit {
         // Redirigir según el rol
         const role = response.rol;
         if (role === 'administrador') {
-          this.router.navigate(["/administrador"]);
+          this.router.navigate(["dashboard/administrador"]);
         } else if (role === 'maestro') {
-          this.router.navigate(["/maestros"]);
+          this.router.navigate(["dashboard/maestros"]);
         } else if (role === 'alumno') {
-          this.router.navigate(["/alumnos"]);
+          this.router.navigate(["dashboard/alumnos"]);
         } else {
-          this.router.navigate(["home"]);
+          this.router.navigate(["dashboard/home"]);
         }
         this.load = false;
       },

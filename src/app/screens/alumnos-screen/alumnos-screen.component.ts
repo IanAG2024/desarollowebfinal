@@ -90,7 +90,7 @@ export class AlumnosScreenComponent {
             console.log("Alumnos: ", this.lista_alumnos);
 
           this.dataSource.data = this.lista_alumnos
-            
+
               this.dataSource.paginator = this.paginator;
               this.dataSource.sort = this.sort;
 
@@ -117,7 +117,7 @@ export class AlumnosScreenComponent {
 
 
     public goEditar(idUser: number) {
-      this.router.navigate(["registro-usuarios/maestros/" + idUser]);
+      this.router.navigate(["registro-usuarios/alumnos/" + idUser]);
     }
 
     public delete(idUser: number) {
@@ -127,24 +127,24 @@ export class AlumnosScreenComponent {
       if (this.rol === 'administrador' || (this.rol === 'maestro' && userId === idUser)) {
         //Si es administrador o es maestro, es decir, cumple la condición, se puede eliminar
         const dialogRef = this.dialog.open(EliminarUserModalComponent,{
-          data: {id: userId, rol: 'maestro'}, //Se pasan valores a través del componente
+          data: {id: idUser, rol: 'alumno'}, //Se pasan valores a través del componente
           height: '288px',
           width: '328px',
         });
 
       dialogRef.afterClosed().subscribe(result => {
         if(result.isDelete){
-          console.log("Maestro eliminado");
-          alert("Maestro eliminado correctamente.");
+          console.log("Maest eliminado");
+          alert("Alumno eliminado correctamente.");
           //Recargar página
           window.location.reload();
         }else{
-          alert("Maestro no se ha podido eliminar.");
+          alert("Alumno no se ha podido eliminar.");
           console.log("No se eliminó el maestro");
         }
       });
       }else{
-        alert("No tienes permisos para eliminar este maestro.");
+        alert("No tienes permisos para eliminar este alumno.");
       }
     }
 

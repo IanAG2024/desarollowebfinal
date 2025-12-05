@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 import { FacadeService } from 'src/app/services/facade.service';
 import { MatRadioChange } from '@angular/material/radio';
 import { AdministradoresService } from 'src/app/services/administradores.service';
+import { AlumnosService } from 'src/app/services/alumnos.service';
+import { MaestrosService } from 'src/app/services/maestros.service';
 
 @Component({
   selector: 'app-registro-usuarios-screen',
@@ -30,7 +32,9 @@ export class RegistroUsuariosScreenComponent implements OnInit {
     public activatedRoute: ActivatedRoute,
     private router: Router,
     public facadeService: FacadeService,
-    private administradoresService: AdministradoresService
+    private administradoresService: AdministradoresService,
+    private alumnosService: AlumnosService,
+    private maestrosService: MaestrosService,
   ) { }
 
   ngOnInit(): void {
@@ -58,12 +62,12 @@ export class RegistroUsuariosScreenComponent implements OnInit {
       this.isAlumno = false;
       this.isMaestro = false;
       this.tipo_user = "administrador";
-    }else if (event.value == "alumno"){
+    }else if (event.value == "alumnos"){
       this.isAdmin = false;
       this.isAlumno = true;
       this.isMaestro = false;
       this.tipo_user = "alumno";
-    }else if (event.value == "maestro"){
+    }else if (event.value == "maestros"){
       this.isAdmin = false;
       this.isAlumno = false;
       this.isMaestro = true;
@@ -92,10 +96,40 @@ export class RegistroUsuariosScreenComponent implements OnInit {
           alert("No se pudo obtener el administrador seleccionado");
         }
       );
-    }else if(this.rol == "maestro"){
+    }else if(this.rol == "maestros"){
       // TODO: Implementar lógica para obtener maestro por ID
-    }else if(this.rol == "alumno"){
+        this.maestrosService.obtenerMaestroPorID(this.idUser).subscribe(
+        (response) => {
+          this.user = response;
+          console.log("Usuario original obtenido: ", this.user);
+          // Asignar datos, soportando respuesta plana o anidada
+          this.user.first_name = response.user?.first_name || response.first_name;
+          this.user.last_name = response.user?.last_name || response.last_name;
+          this.user.email = response.user?.email || response.email;
+          this.user.tipo_usuario = this.rol;
+          this.isMaestro = true;
+        }, (error) => {
+          console.log("Error: ", error);
+          alert("No se pudo obtener el maestro seleccionado");
+        }
+      );
+    }else if(this.rol == "alumnos"){
       // TODO: Implementar lógica para obtener alumno por ID
+        this.alumnosService.obtenerAlumnoPorID(this.idUser).subscribe(
+        (response) => {
+          this.user = response;
+          console.log("Usuario original obtenido: ", this.user);
+          // Asignar datos, soportando respuesta plana o anidada
+          this.user.first_name = response.user?.first_name || response.first_name;
+          this.user.last_name = response.user?.last_name || response.last_name;
+          this.user.email = response.user?.email || response.email;
+          this.user.tipo_usuario = this.rol;
+          this.isAlumno = true;
+        }, (error) => {
+          console.log("Error: ", error);
+          alert("No se pudo obtener el alumno seleccionado");
+        }
+      );
     }
 
   }

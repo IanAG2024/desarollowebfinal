@@ -15,7 +15,12 @@ import { RegistroAdminComponent } from './partials/registro-admin/registro-admin
 import { RegistroAlumnosComponent } from './partials/registro-alumnos/registro-alumnos.component';
 import { RegistroMaestrosComponent } from './partials/registro-maestros/registro-maestros.component';
 import {MatTableDataSource} from '@angular/material/table';
+import { NgxMatTimepickerModule } from 'ngx-mat-timepicker';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { MatChipsModule } from '@angular/material/chips';
 
+
+import { NgChartsModule } from 'ng2-charts';
 //Angular material
 import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
@@ -38,9 +43,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 //Ngx-cookie-service
 import { CookieService } from 'ngx-cookie-service';
 
-// Modulo para las gráficas
-import { NgChartsModule } from 'ng2-charts';
-
 // Third Party Modules
 import { NgxMaskDirective, provideNgxMask } from 'ngx-mask';
 import { HomeScreenComponent } from './screens/home-screen/home-screen.component';
@@ -51,6 +53,11 @@ import { NavbarUserComponent } from './partials/navbar-user/navbar-user.componen
 import { SidebarComponent } from './partials/sidebar/sidebar.component';
 import { EliminarUserModalComponent } from './modals/eliminar-user-modal/eliminar-user-modal.component';
 import { GraficasScreenComponent } from './screens/graficas-screen/graficas-screen.component';
+import { RegistroEventosScreenComponent } from './screens/registro-eventos-screen/registro-eventos-screen.component';
+import { RegistroEventosAdminComponent } from './partials/registro-eventos-admin/registro-eventos-admin.component';
+import { EventosScreenComponent } from './screens/eventos-screen/eventos-screen.component';
+import { EliminarEventoModalComponent } from './modals/eliminar-evento-modal/eliminar-evento-modal.component';
+import { EditarEventoModalComponent } from './modals/editar-evento-modal/editar-evento-modal.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +76,13 @@ import { GraficasScreenComponent } from './screens/graficas-screen/graficas-scre
     NavbarUserComponent,
     SidebarComponent,
     EliminarUserModalComponent,
-    GraficasScreenComponent
+    GraficasScreenComponent,
+    RegistroEventosScreenComponent,
+    RegistroEventosAdminComponent,
+    EventosScreenComponent,
+    EliminarEventoModalComponent,
+    EditarEventoModalComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -91,11 +104,12 @@ import { GraficasScreenComponent } from './screens/graficas-screen/graficas-scre
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSortModule,
-    MatFormFieldModule, MatInputModule, MatTableModule,
-
-    NgChartsModule
-
+     MatSortModule,
+     MatFormFieldModule, MatInputModule, MatTableModule,
+    NgChartsModule,
+     NgxMatTimepickerModule,
+     NgxMaterialTimepickerModule,
+      MatChipsModule
   ],
   providers: [
     CookieService,

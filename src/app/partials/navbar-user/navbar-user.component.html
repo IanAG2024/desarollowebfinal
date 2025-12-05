@@ -6,25 +6,30 @@
         <span class="material-icons">person_add</span>
         <span>Registro</span>
       </li>
-      <li *ngIf="canSeeAdminItems()" routerLink="/administrador" routerLinkActive="active" class="scoop-navbar-item">
+      <li *ngIf="canSeeAdminItems()" routerLink="/dashboard/administrador" routerLinkActive="active" class="scoop-navbar-item">
         <span class="material-icons">admin_panel_settings</span>
         <span>Admins</span>
       </li>
-      <li *ngIf="canSeeTeacherItems()" routerLink="/maestros" routerLinkActive="active" class="scoop-navbar-item">
+      <li *ngIf="canSeeTeacherItems()" routerLink="/dashboard/maestros" routerLinkActive="active" class="scoop-navbar-item">
         <span class="material-icons">people</span>
         <span>Maestros</span>
       </li>
-      <li *ngIf="canSeeStudentItems()" routerLink="/alumnos" routerLinkActive="active" class="scoop-navbar-item">
+      <li *ngIf="canSeeStudentItems()" routerLink="/dashboard/alumnos" routerLinkActive="active" class="scoop-navbar-item">
         <span class="material-icons">school</span>
         <span>Alumnos</span>
       </li>
-      <li *ngIf="canSeeStudentItems()" routerLink="/graficas" routerLinkActive="active" class="scoop-navbar-item">
+      <li *ngIf="canSeeStudentItems()" routerLink="/dashboard/graficas" routerLinkActive="active" class="scoop-navbar-item">
         <span class="material-icons">bar_chart</span>
         <span>Gráficas</span>
       </li>
-      <li *ngIf="canSeeTeacherItems()" routerLink="/eventos-academicos" routerLinkActive="active" class="scoop-navbar-item">
+      <li *ngIf="canSeeStudentItems()" routerLink="/dashboard/eventos-academicos" routerLinkActive="active" class="scoop-navbar-item">
         <span class="material-icons">event</span>
         <span>Eventos Académicos</span>
+      </li>
+
+      <li *ngIf="canSeeAdminItems()" routerLink="/registro-eventos" routerLinkActive="active" class="scoop-navbar-item">
+        <span class="material-icons">edit_calendar</span>
+        <span>Registro de Eventos Académicos</span>
       </li>
     </ul>
     <button class="scoop-logout-btn" (click)="logout()">
@@ -51,30 +56,35 @@
     <nav class="scoop-side-navbar" [ngClass]="{'mobile-open': mobileOpen}">
       <ul class="scoop-navbar-list">
 
-        <li *ngIf="canSeeRegisterItem()" routerLink="/registro-usuarios" routerLinkActive="active" class="scoop-navbar-item" (click)="closeSidebar()">
-          <span class="material-icons">person_add</span>
-          <span>Registro</span>
-        </li>
-        <li *ngIf="canSeeAdminItems()" routerLink="/administrador" routerLinkActive="active" class="scoop-navbar-item" (click)="closeSidebar()">
-          <span class="material-icons">admin_panel_settings</span>
-          <span>Admins</span>
-        </li>
-        <li *ngIf="canSeeAdminItems()" routerLink="/maestros" routerLinkActive="active" class="scoop-navbar-item" (click)="closeSidebar()">
-          <span class="material-icons">people</span>
-          <span>Maestros</span>
-        </li>
-        <li *ngIf="canSeeStudentItems()" routerLink="/alumnos" routerLinkActive="active" class="scoop-navbar-item" (click)="closeSidebar()">
-          <span class="material-icons">school</span>
-          <span>Alumnos</span>
-        </li>
-        <li *ngIf="canSeeStudentItems()" routerLink="/graficas" routerLinkActive="active" class="scoop-navbar-item" (click)="closeSidebar()">
-          <span class="material-icons">bar_chart</span>
-          <span>Gráficas</span>
-        </li>
-        <li *ngIf="canSeeTeacherItems()" routerLink="/eventos-academicos" routerLinkActive="active" class="scoop-navbar-item" (click)="closeSidebar()">
-          <span class="material-icons">event</span>
-          <span>Eventos Académicos</span>
-        </li>
+       <li *ngIf="canSeeRegisterItem()" routerLink="/registro-usuarios" routerLinkActive="active" class="scoop-navbar-item">
+        <span class="material-icons">person_add</span>
+        <span>Registro</span>
+      </li>
+      <li *ngIf="canSeeAdminItems()" routerLink="/dashboard/administrador" routerLinkActive="active" class="scoop-navbar-item">
+        <span class="material-icons">admin_panel_settings</span>
+        <span>Admins</span>
+      </li>
+      <li *ngIf="canSeeTeacherItems()" routerLink="/dashboard/maestros" routerLinkActive="active" class="scoop-navbar-item">
+        <span class="material-icons">people</span>
+        <span>Maestros</span>
+      </li>
+      <li *ngIf="canSeeStudentItems()" routerLink="/dashboard/alumnos" routerLinkActive="active" class="scoop-navbar-item">
+        <span class="material-icons">school</span>
+        <span>Alumnos</span>
+      </li>
+      <li *ngIf="canSeeStudentItems()" routerLink="/dashboard/graficas" routerLinkActive="active" class="scoop-navbar-item">
+        <span class="material-icons">bar_chart</span>
+        <span>Gráficas</span>
+      </li>
+      <li *ngIf="canSeeStudentItems()" routerLink="/dashboard/eventos-academicos" routerLinkActive="active" class="scoop-navbar-item">
+        <span class="material-icons">event</span>
+        <span>Eventos Académicos</span>
+      </li>
+
+      <li *ngIf="canSeeAdminItems()" routerLink="/registro-eventos" routerLinkActive="active" class="scoop-navbar-item">
+        <span class="material-icons">edit_calendar</span>
+        <span>Registro de Eventos Académicos</span>
+      </li>
       </ul>
       <button class="scoop-logout-btn" (click)="logout(); closeSidebar()">
         <span class="material-icons">logout</span>

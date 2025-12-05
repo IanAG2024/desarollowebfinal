@@ -116,6 +116,7 @@ export class MaestrosScreenComponent implements OnInit {
     // Administrador puede eliminar cualquier maestro
     // Maestro solo puede eliminar su propio registro
     if (this.rol === 'administrador' || (this.rol === 'maestro' && userIdSession === idUser)) {
+
       //Si es administrador o es maestro, es decir, cumple la condición, se puede eliminar
       const dialogRef = this.dialog.open(EliminarUserModalComponent,{
         data: {id: idUser, rol: 'maestro'}, //Se pasan valores a través del componente
@@ -130,6 +131,7 @@ export class MaestrosScreenComponent implements OnInit {
         //Recargar página
         window.location.reload();
       }else{
+        
         alert("Maestro no se ha podido eliminar.");
         console.log("No se eliminó el maestro");
       }
