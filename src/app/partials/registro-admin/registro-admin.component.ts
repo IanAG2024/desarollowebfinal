@@ -99,7 +99,7 @@ export class RegistroAdminComponent implements OnInit {
           console.log("Administrador registrado: ", response);
           if(this.token && this.token !== ""){
             this.router.navigate(["dashboard/administrador"]);
-          }else{
+          }else{                   
             this.router.navigate(["/"]);
           }
         },
